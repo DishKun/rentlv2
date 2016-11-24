@@ -74,14 +74,7 @@ def userinfo(request):
         collect_list = Collect.objects.filter(user=user)
         context['collect_list'] = collect_list
     except ObjectDoesNotExist:
-        try:
-            a = Collect.objects.filter(house_title='你还没有任何预约哦')
-            context['collect_list'] = a
-        except ObjectDoesNotExist:
-            b = Collect(house_title='你还没有任何预约哦')
-            b.save()
-            a = Collect.objects.filter(house_title='你还没有任何预约哦')
-            context['collect_list'] = a
+        pass
 
 
 
