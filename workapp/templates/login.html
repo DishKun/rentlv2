@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title">
+        <link rel="stylesheet" href="{% static 'css/Login.css' %}" media="screen" title="no title">
+    </head>
+    <body>
+        <!-- 灰色的背景 -->
+        <div class="ui view">
+            <!-- 中间的白色部分 -->
+            <form class="ui form" method="post" style="height: auto;padding-bottom:20px;">
+                <div class="ui text menu">
+                    <div class="menu login">
+                        登录
+                    </div>
+                    <a href="{% url 'index' %}" class="ui image close_right">
+                        <img src="/static/image/close_icon2.png" alt="" />
+                    </a>
+                </div>
+                <div class="ui view yellow_login"></div>
+                <div class="ui divider"></div>
+
+                {% if form.errors %}
+                    <p class="ui error message">
+                        {{ form.errors }}
+                    </p>
+
+                    {% for field in form %}
+                        <div class="{{ field.errors|yesno:'error, '}} field">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+
+                {% else %}
+                    <p class="ui header">{{ is_user }}</p>
+                    {% for field in form %}
+                        <div class="field">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+
+                {% endif %}
+
+                {% csrf_token %}
+
+                <div class="inline field">
+                    <div class="ui checkbox checked">
+                        <input type="checkbox" tabindex="0">
+                        <label>记住我</label>
+                    </div>
+                    <button class="ui button forget" type="submit" name="forget">
+                        忘记密码？
+                    </button>
+                </div>
+
+                <button type="submit" class="ui circular right button" >
+                    登录
+                    <i class="chevron inverted right icon"></i>
+                </button>
+
+            </form>
+        </div>
+    </body>
+</html>

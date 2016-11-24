@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Register</title>
+        <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title">
+        <link rel="stylesheet" href="{% static 'css/Register.css' %}" media="screen" title="no title">
+    </head>
+    <body>
+        <!-- 灰色的背景 -->
+        <div class="ui view">
+            <!-- 中间的白色部分 -->
+            <form class="ui form" method="post" style="height: auto;padding-bottom:20px;">
+                <div class="ui text menu">
+                    <div class="menu login">
+                        注册
+                    </div>
+                    <a href="{% url 'index' %}" class="ui image close_right">
+                        <img src="/static/image/close_icon2.png" alt="" />
+                    </a>
+                </div>
+                <div class="ui view yellow_login"></div>
+                <div class="ui divider"></div>
+
+                {% if form.errors %}
+                    <p class="ui error message">
+                        {{ form.errors }}
+                    </p>
+
+                    {% for field in form %}
+                        <div class="{{ field.errors|yesno:'error, '}} field">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+
+                {% else %}
+
+                    {% for field in form %}
+                        <div class="field">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+
+                {% endif %}
+
+                {% csrf_token %}
+
+                <!--<div class="field">-->
+                    <!--<input type="text" name="first-name" placeholder="邮箱">-->
+                <!--</div>-->
+                <!--<div class="field">-->
+                    <!--<input type="text" name="first-name" placeholder="用户名">-->
+                <!--</div>-->
+                <!--<div class="field">-->
+                    <!--<input type="text" name="last-name" placeholder="密码">-->
+                <!--</div>-->
+
+                <button type="submit" class="ui circular right button" >
+                    注册
+                    <i class="chevron inverted right icon"></i>
+                </button>
+
+            </form>
+        </div>
+    </body>
+</html>
